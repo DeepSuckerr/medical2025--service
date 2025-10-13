@@ -1,8 +1,6 @@
 package com.wsj.medical2025.config;
 
-<<<<<<< HEAD
-public class SwaggerConfig {
-=======
+
 import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -42,9 +40,6 @@ public class SwaggerConfig {
                 .pathsToMatch("/order/*") // 接口请求路径规则
                 .build();
     }
->>>>>>> 5d5737f4adebe56990a33c8ecb9f9a6789ddc09b
-
-
-
 
 }
+
