@@ -12,4 +12,6 @@ public interface DrugCompanyService {
     JSONResult addCompany(DrugCompanyDTO drugCompanyDTO);
 
     JSONResult deleteCompany(Long companyId);
+
+    JSONResult updateCompany(DrugCompanyDTO drugCompanyDTO);
 }

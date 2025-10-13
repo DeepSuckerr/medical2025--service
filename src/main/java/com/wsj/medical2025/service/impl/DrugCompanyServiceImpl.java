@@ -66,4 +66,19 @@ public class DrugCompanyServiceImpl implements DrugCompanyService {
             return new JSONResult(500, "删除失败，服务器内部错误");
         }
     }
+
+    @Override
+    public JSONResult updateCompany(DrugCompanyDTO drugCompanyDTO) {
+        if (drugCompanyDTO == null || drugCompanyDTO.getCompanyId() == null || drugCompanyDTO.getCompanyId() <= 0) {
+            return new JSONResult(201,"无效的公司ID");
+        }
+        DrugCompany drugCompany = new DrugCompany();
+        BeanUtils.copyProperties(drugCompanyDTO, drugCompany);
+        drugCompany.setUpdateTime(new Date());
+        int i = drugCompanyMapper.updateById(drugCompany);
+        if(i == 1){
+            return new JSONResult(200,"更新成功");
+        }
+        return new JSONResult(202,"更新失败");
+    }
 }

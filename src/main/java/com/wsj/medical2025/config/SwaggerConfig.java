@@ -34,12 +34,13 @@ public class SwaggerConfig {
 
 
     @Bean
-    public GroupedOpenApi orderApi() { // 创建了一个api接口的分组
+    public GroupedOpenApi drugCompany() { // 创建了一个api接口的分组
         return GroupedOpenApi.builder()
-                .group("订单模块") // 分组名称
-                .pathsToMatch("/order/*") // 接口请求路径规则
+                .group("制药公司模块") // 分组名称
+                .pathsToMatch("/drugCompany/*") // 接口请求路径规则
                 .build();
     }
+
 
 }
 

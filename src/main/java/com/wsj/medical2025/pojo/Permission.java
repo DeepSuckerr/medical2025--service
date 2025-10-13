@@ -2,7 +2,6 @@ package com.wsj.medical2025.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.security.Permission;
 import java.util.List;
 
 public class Permission {
