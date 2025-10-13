@@ -2,10 +2,9 @@ package com.wsj.medical2025.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.security.Permission;
 import java.util.List;
 
-public class Perminssion {
+public class Permission {
 
     @JsonIgnore
     private Integer id;//菜单id

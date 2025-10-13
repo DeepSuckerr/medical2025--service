@@ -1,4 +1,4 @@
 package com.wsj.medical2025.controller;
 
-public class AccountControoler {
+public class AccountController {
 }
