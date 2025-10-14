@@ -1,5 +1,7 @@
 package com.wsj.medical2025.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wsj.medical2025.commons.JSONResult;
 import com.wsj.medical2025.dto.DrugCompanyDTO;
 import com.wsj.medical2025.mapper.DrugCompanyMapper;
@@ -20,9 +22,31 @@ public class DrugCompanyServiceImpl implements DrugCompanyService {
     private DrugCompanyMapper drugCompanyMapper;
 
     @Override
-    public JSONResult getCompanyAll(DrugCompanyDTO drugCompanyDTO) {
-        List<DrugCompany> companyList = drugCompanyMapper.getCompanyAll(drugCompanyDTO);
-        return new JSONResult(200, companyList);
+    public JSONResult getCompanyAll(Integer currentPage, Integer pageSize, String keyword) {
+        QueryWrapper<DrugCompany> wrapper = new QueryWrapper<>();
+        //是否模糊查询判断
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            // 同时根据公司名、电话或ID进行模糊查询
+            wrapper.and(i -> i.like("company_name", keyword)
+                    .or().like("company_phone", keyword)
+                    .or().like("company_id", keyword));
+        }
+        //是否分页查询判断
+        if (currentPage != null && pageSize != null && currentPage > 0 && pageSize > 0) {
+            Page<DrugCompany> page = new Page<>(currentPage, pageSize);
+            System.out.println("分页之后的数据"+page.getRecords());
+            System.out.println("数据的总记录数"+page.getTotal());
+            System.out.println("当前页码"+page.getCurrent());
+            System.out.println("每页条数"+page.getSize());
+            System.out.println("总页数"+page.getPages());
+
+            //两个查询都判断完后都扔到selectPage中处理得到resultPage
+            Page<DrugCompany> resultPage = drugCompanyMapper.selectPage(page, wrapper);
+            return new JSONResult(200, "查询成功", resultPage);
+        } else {
+            List<DrugCompany> companyList = drugCompanyMapper.selectList(wrapper);
+            return new JSONResult(200, "查询成功", companyList);
+        }
     }
 
     @Override

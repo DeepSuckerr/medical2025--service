@@ -7,7 +7,8 @@ import com.wsj.medical2025.pojo.DrugCompany;
 import java.util.List;
 
 public interface DrugCompanyService {
-    JSONResult getCompanyAll(DrugCompanyDTO drugCompanyDTO);
+
+    JSONResult getCompanyAll(Integer currentPage,Integer pageSize,String keyword);
 
     JSONResult addCompany(DrugCompanyDTO drugCompanyDTO);
 

@@ -7,12 +7,7 @@ import com.wsj.medical2025.service.DrugCompanyService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,8 +22,10 @@ public class DrugCompanyController {
 
     @GetMapping("/getCompanyAll")
     @Operation(summary = "获取制药公司",description = "获取全部制药公司")
-    public JSONResult getCompanyAll(DrugCompanyDTO drugCompanyDTO) {
-        return drugCompanyService.getCompanyAll(drugCompanyDTO);
+    public JSONResult getCompanyAll(@RequestParam(value = "key", required = false) String keyword,
+                                    @RequestParam(value = "currentPage" ,required = false) Integer currentPage,
+                                    @RequestParam(value = "pageSize" ,required = false) Integer pageSize) {
+        return drugCompanyService.getCompanyAll(currentPage,pageSize,keyword);
     }
 
     @PostMapping("/addCompany")
