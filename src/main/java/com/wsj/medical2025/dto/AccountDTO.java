@@ -29,6 +29,8 @@ public class AccountDTO implements Serializable {
     private String uType;
     @Schema(title = "封装用户真实姓名")//ROLE_1管理员、ROLE_2医生、ROLE_3患者
     private String realName;//真实姓名
+    @Schema(title = "token值")
+    private String token;
 
 
 }

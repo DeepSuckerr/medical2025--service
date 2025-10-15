@@ -6,7 +6,9 @@ import com.wsj.medical2025.dto.AccountDTO;
 import com.wsj.medical2025.mapper.AccountMapper;
 import com.wsj.medical2025.pojo.Account;
 import com.wsj.medical2025.service.AccountService;
+import com.wsj.medical2025.utils.CreateTokensTest;
 import com.wsj.medical2025.utils.DM5Password;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,8 +42,13 @@ public class AccountServiceImpl implements AccountService {
 //        if (!DM5Password.verify(accountDTO.getPwd(), account.getPwd())) {
 //            return new JSONResult(204,"请检查用户名或密码是否正确",null);
 //        }
+        //下放令牌
+        String token = CreateTokensTest.createToken(account.getId(), account.getUname());
+        AccountDTO accountDTO1 = new AccountDTO();
+        BeanUtils.copyProperties(account, accountDTO1);
+        accountDTO1.setToken(token);
 
-        return new JSONResult(200,"登录成功",account);
+        return new JSONResult(200,"登录成功",accountDTO1);
     }
 
     @Override
